@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Richard's Notes</title>
+<script type="text/javascript" src="GP-notes.json"></script>
+<script type="text/javascript" src="GP-NT.json"></script>
+<script>
+function createText () {
+	var myText="<table>";
+	var div=document.getElementById("MainDiv");
+	for (var i=0; i<GP.length; i++) {
+		if (i in GP_Notes) {
+			myText+="<tr><td valign='top'>"+i+"&nbsp;&nbsp;&nbsp;</td><td  valign='top'>"+GP_Notes[i]+"</td></tr>";
+		}
+	}
+	myText+="</table>";
+	div.innerHTML=myText;
+	
+}
+</script>
+<style>
+div {margin-left: auto;
+	margin-right: auto;
+	width: 600px;}
+</style>
+</head>
+<body onload="createText()">
+<div class="main" id="MainDiv">
+</div>
+
+
+</body>
+</html>

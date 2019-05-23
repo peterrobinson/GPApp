@@ -1,0 +1,266 @@
+.ui-overlay-c {background-color: transparent }
+.ui-page-theme-c {background-color: transparent }
+.ui-body-b {background-color: transparent }
+
+.ui-panel-inner {
+   position: absolute;
+   margin: 30px; 
+   top: 30px;
+   left: 0;
+   right: 0;
+   bottom: 0px;
+   overflow: scroll;
+   -webkit-overflow-scrolling: touch;
+}
+#Buttons {text-align:center;}
+    input.ui-slider-input {
+      display : none !important;
+    }
+ .ui-slider {
+ 	margin:2 !important;
+    }
+.buttons {height:50px}
+.linkInner {position: relative; top: -3px;}
+
+#PopImage {background-image: url('msimages/2R.JPG'); width: 510px; height: 60px; position: absolute }  
+#NGImage {background-image: url('msimages/2R.JPG'); width: 510px; height: 60px; position: absolute }  
+#LineInf {z-index: 999; }
+#outerPage{overflow:hidden}
+
+#TextNTJ{padding-left: 3em;
+ padding-right: 3em;
+} 
+
+.bodyNT {background-image: url("images/parchment.jpg"); background-color: transparent; font-family: Arial, Helvetica, sans-serif}
+.bodyTJ {background-color: #F4F0E8; font-family:"Times New Roman", Times, serif}
+
+#NGLineNT {background-image: url("images/parchment.jpg"); background-color: transparent}
+#NGLineTJ {background-color: background-color: #F4F0E8}
+
+#BodyText { background-color: transparent }
+
+.paraph {color:blue; text-indent:-10px;}
+.dc4 { float: left; color: blue; font-size: 120px; line-height: 90px; padding-top: 4px; padding-right: 8px; padding-left: 3px;  }
+
+.NTBg {font-family: Arial, Helvetica, sans-serif}
+.TJBg {font-family:"Times New Roman", Times, serif}
+
+#Buttons .ui-btn {
+ padding: 0.3em 0.4em 0.1em 0.3em !important;
+}
+
+#Buttons .ui-btn-emph {
+    box-shadow: 0 0 0 6px #CCBC99 inset;
+//    border-radius: 1em;
+}
+
+#footer .ui-btn {
+ padding: 0.1em 0.4em 0.1em 0.3em !important
+}
+
+#footer.ui-footer {
+	border-width: 1 0 0 0 !important
+}
+
+#slider .ui-btn {
+padding: 1.2em!important
+}
+#sliderself .ui-btn {
+padding: 0.1em!important
+}
+p.gBlank {
+	height: 18px;
+	padding:0;
+	margin:0;
+}
+span.LineNo { 
+	position: absolute; 
+	left: -3em; 
+	font-size:80%
+}
+#LineInf .ui-dialog-contain { 
+    max-width: 540px;
+}
+ p.PLine {
+ 	position: relative;
+ 	margin-top: 4px;
+ 	margin-bottom:4px;
+}
+
+q {
+    display: block;
+    margin: 10px;
+}
+
+p.gloss {
+	margin:0px;
+	font-size:90%;
+	text-indent: -0.5em;
+}
+ p.PLine3 {
+}
+
+ p.PLine2 {
+ 	position: relative;
+ 	margin-top: 0;
+ 	margin-bottom:0;
+}
+ p.PLine4 {
+ 	margin-top: 2px;
+ 	margin-bottom:1px;
+}
+
+.wrapper {
+    position:relative;
+}
+#PUText {
+	z-index:1000;
+}
+
+#NotesGlosses {
+    position: absolute;
+ //   left: 0px; /*Set left value to WidthOfLeftFrameDiv*/
+ //   top: 0px;
+    background-color: white;
+    padding: 0px;
+}
+
+#NotesGlossesBox {
+    background-color: white;
+    top: 0px;
+}
+
+#NotesGlossesText {
+  	overflow-y: auto;
+    background-color: #eff0f1;
+    font-family:"Times New Roman", Times, serif
+}
+
+#Notes {
+	position: relative;
+	top:-5px;
+	padding: 0em 0em 0em 2em;
+	margin-left: 0px;
+	margin-right: 6px;
+	height: 0px;
+    display: none;
+	border:40px solid transparent;
+-webkit-border-image:url(images/book-black.png) 512 30 fill stretch; /* Safari 5 */
+-o-border-image:url(images/book-black.png) 512 512 fill stretch; /* Opera 10.5-12.1 */
+	border-image:url(images/book-black.png) 512 512 fill stretch;
+}
+
+#Buffer {
+	position: relative;
+	top:-5px;
+	height: 30px;
+ //  	 border-image:url('images/book-black.png') 512 512 stretch;
+//  	background-position: -23px -10px;
+//	background-size: 877px 620px;
+}
+
+#NGImageWrapper {margin-left: 15px; margin-right: 15px}
+#NGTextWapper {margin-left: 100px; margin-right: 100px; o}
+#NotesText {
+	overflow-y: auto;
+    font-family:"Times New Roman", Times, serif;
+	background-color: #eff0f1;
+}
+
+#GlossesText {
+	overflow: hidden;
+    font-family:"Times New Roman", Times, serif;
+    padding: 0.2em 0.2em 0.2em 1em !important;
+}
+
+#GlossesText span {font-family: Arial, Helvetica, sans-serif; font-weight: bold}
+
+#Glosses {
+	overflow: hidden;
+}
+
+#BodyText {
+	overflow: hidden;
+}
+#TextNTJ {
+	overflow: hidden;
+}
+
+.focusNote {background-color: #CACACA}
+
+#Glosses {
+    background-color:white;
+// 	background-color:transparent;
+    padding-bottom: 10px;
+//    z-index:999;
+//box-shadow:2px 2px 10px 10px #C9C9C9;
+//-webkit-box-shadow:2px 2px 2px 12px #C9C9C9;
+//-moz-box-shadow:2px 2px 10px 10px #C9C9C9;
+//	background-image: url('images/red-book-half.png');
+//	background-size: 2px 2px;
+-webkit-border-image:url('bordersredpng') 30 30 stretch; /* Safari 5 */
+-o-border-image:url('images/bordersred.png') 30 30 stretch; /* Opera 10.5-12.1 */
+    border-image:url(images/bordersred.png) 30 30 stretch;
+    border-width: 30px;
+    border-style: solid;
+	float: right;
+	position: absolute;
+}
+/*deprecated box stuff instead of image behind gloss..
+	-moz-box-shadow: 0 0 8px #999;
+-webkit-box-shadow: 0 0 8px #999;
+box-shadow: 0 0 5px #999;
+*/
+.box {
+    position:absolute;
+    top:10px;
+    left:10px;
+    width:420px;
+    height:42px;
+    border:2px solid #ffffff;
+    background-color:transparent;
+    z-index:999
+}
+
+.ui-header .ui-title {
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+p.PLine3 {margin: 0px}
+
+#biblioref {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    width: 350px;
+    background: #f2f2f2;
+    font-family:"Times New Roman", Times, serif;
+}
+
+#biblioref {
+    position:absolute;
+    top:0;
+    left:0;
+    display:none;
+}
+
+.biblio {
+	border-bottom-style: dotted;
+	border-bottom-width: thin;
+}
+
+img.arrow {
+	position: absolute; 
+	height: 64px; 
+	width: 64px;
+}
+
+.arrow:hover {
+	cursor: pointer;
+}
+
+#toggleMenuIMg {
+	background-color: transparent!important; 
+	border:none!important;
+}
