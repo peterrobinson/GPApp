@@ -7,6 +7,7 @@ Gaps["30"]=1;
 Gaps["46"]=1;
 var currView="MS"  //choices: NT MS TJ NG (last in small window/mobile only)
 var line=0;
+var currAudioLine=0;
 var currentPage="1r";
 var viewport = {width  : 0,height : 0};
 var warnedSize=false;
@@ -24,7 +25,7 @@ $(document).bind("pageinit", function(){
      pageInit=true;
      beforeResize.width=viewport.width  = $(window).width();
      beforeResize.height=viewport.height = $(window).height();
-     $("body").height(viewport.height);
+ //    $("body").height(viewport.height);
      $("body").width(viewport.width);
      // 	$("#Buttons").height(120);
      $( "#LineInf" ).hide();
@@ -40,7 +41,7 @@ $(document).bind("pageinit", function(){
      $("#BodyText").height(viewport.height);
      $("#Glosses").css({'left':$("body").width()});
      $("#stopAudioLink").hide();
-    
+
      if (screen.width<500) $(".buttons").css({height:40});
      //   	$("#apAdjust").hide();
      $( "input" ).on( "slidestop", function( event, ui ) {moveText();} );
@@ -64,7 +65,7 @@ $(document).bind("pageinit", function(){
      		}
      	}
      	$("#Place").html(part);
-     }); 
+     });
       $("#msImage").mousemove(function(event) {
       	if (!audioPlaying) {
       		//are we within the page frame for this page?
@@ -112,10 +113,10 @@ $(document).bind("pageinit", function(){
 							$('#msLIneBox').css({'width': (GP_Images[GP[arrayline].page].frame_r-GP_Images[GP[arrayline].page].frame_l)*factor, 'height': spacePerLine*2.5});
 							$('#msLIneBox').css({top: (thisPage.pageInf.frame_t*factor), left: GP_Images[GP[arrayline].page].frame_l*factor});
 						} else {
-							$('#msLIneBox').css({'width': (GP_Images[GP[arrayline].page].frame_r-GP_Images[GP[arrayline].page].frame_l)*factor, 'height': spacePerLine});
+							$('#msLIneBox').css({'width': (GP_Images[GP[arrayline].page].frame_r-GP_Images[GP[arrayline].page].frame_l)*factor, 'height': spacePerLine*1.8});
 							$('#msLIneBox').css({top: (thisPage.pageInf.frame_t*factor)+thisLine*spacePerLine, left: GP_Images[GP[arrayline].page].frame_l*factor});
 						}
-						if ($('#Notes').is(':visible') && event.pageY>$(window).height()-$("#Notes").height()-(spacePerLine*4)) 
+						if ($('#Notes').is(':visible') && event.pageY>$(window).height()-$("#Notes").height()-(spacePerLine*4))
 							$('#PUText').css({top: (thisPage.pageInf.frame_t*factor)+(thisLine-3)*spacePerLine, left: GP_Images[GP[arrayline].page].frame_l*factor});
 						else if ($('#footer').is(':visible') && event.pageY>$(window).height()-(spacePerLine*4))
 							$('#PUText').css({top: (scrolltop+thisPage.pageInf.frame_t*factor)+(thisLine-3)*spacePerLine, left: GP_Images[GP[arrayline].page].frame_l*factor});
@@ -133,7 +134,7 @@ $(document).bind("pageinit", function(){
 			}
     	}
       });
-    
+
 });
 
 function setUpArrows(which) {
@@ -222,7 +223,7 @@ function prevMS() {
     		if ($("#Glosses").is(":visible")) $("#Glosses").css({top:"0"});
     		line=thisPage.pageInf.firstl;
     		if (!prevPage) $("#imageLeftArrow").hide();
-    	}	
+    	}
     }
     else { //leap to previous page
     	$("#msImage").attr("src", "msimages/"+prevPage.pageInf.image);
@@ -393,6 +394,22 @@ function adjustViews() {
 		setUpArrows("text");
 	}
 	if (currView=="MS" && $(window).height()!=beforeResize.height) {
+		//change msLineBox size
+
+		var myImage = $("#msImage").attr("src").slice($("#msImage").attr("src").indexOf("/")+1);
+		var thisPage=null;
+		for (var i in GP_Images) {
+			if (GP_Images[i].image==myImage) {
+				thisPage={page: i, pageInf: GP_Images [i]};
+				break;
+			}
+		}
+		var winwidth=$("#msImage").width();
+    	var factor=winwidth/thisPage.pageInf.full_x;
+    	var arrayline=getArrayLine(line);
+    	var spacePerLine=((thisPage.pageInf.frame_b-thisPage.pageInf.frame_t)/thisPage.pageInf.nlines)*factor;
+    	$('#msLIneBox').css({'width': (GP_Images[GP[arrayline].page].frame_r-GP_Images[GP[arrayline].page].frame_l)*factor, 'height': spacePerLine*1.5});
+  		$('#msLIneBox').css({top: (thisPage.pageInf.frame_t*factor), left: GP_Images[GP[arrayline].page].frame_l*factor});
 		if ($('#Notes').is(':visible')) {
 			if ($('#Glosses').is(':visible')) {
 				$("#Glosses").css({height:($(window).height()/2)+10, backgroundSize: "300px "+(($(window).height()/2)+10)+"px"});
@@ -568,7 +585,7 @@ function hideGloss () {
         }
 
 	} else {
-        
+
 	}
    	$("#glossIcn").attr("src", "inactive/icons-07.png");
     $('#glossIcn').parent().removeClass('ui-btn-emph');
@@ -639,7 +656,7 @@ function msToTime(duration) {
     , seconds = parseInt((duration/1000)%60)
     , minutes = parseInt((duration/(1000*60))%60)
     , hours = parseInt((duration/(1000*60*60))%24);
-    
+
     hours = (hours < 10) ? "0" + hours : hours;
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
@@ -654,7 +671,7 @@ function timeToMS(duration) {
     var minutes=duration.slice(3,5);
     var seconds=duration.slice(6,12);
     var ms= (3600*parseInt(hours)+60*parseInt(minutes)+parseFloat(seconds));
-    console.log("duration "+duration+"hours "+hours+" minutes "+minutes+" seconds "+seconds+" ms "+ms);
+ //   console.log("duration "+duration+"hours "+hours+" minutes "+minutes+" seconds "+seconds+" ms "+ms);
     return (3600*parseInt(hours)+60*parseInt(minutes)+parseFloat(seconds));
 }
 
@@ -768,7 +785,7 @@ function populateText(override) {
         }
        var availableHeight=$('#BodyText').height()-3;
         //first scenario: may not need to replace the current view at all. If current line is in view, do nothing at all, and current view has not changed
-        //so calculate: how many lines are visible?
+        //so f: how many lines are visible?
         //so: is current line in view?
         //switching views: clean out
         var lineVisible=false;
@@ -826,7 +843,7 @@ function populateText(override) {
         //set the background for text or translation
         if (currView=="NT") {$('#BodyText').removeClass("TJBg").addClass("NTBg");$('body').removeClass("bodyTJ").addClass("bodyNT")};
         if (currView=="TJ") {$('#BodyText').removeClass("NTBg").addClass("TJBg");$('body').removeClass("bodyNT").addClass("bodyTJ")};
-        
+
         if (audioPlaying) borderLine (line);
         //now: check the state of the msImage... do we need to replace it?
         if (GP_Images[GP[start].page].image!=$("#msImage").attr("src")) {
@@ -881,7 +898,11 @@ function resumeAudio() {
 //only called in ms view when audio is playing, or we move forward or back some way by the slider
 function showPUText(thisline) {
 	var arrayline=getArrayLine(thisline);
- 
+ 	if (audioPlaying && thisline<parseInt(currAudioLine)) {
+ //		console.log("in ShowPUText1 line "+thisline+" currline "+currAudioLine);
+ 		thisline+=2;
+ 		return;
+ 	};
     if (GP_TJ[arrayline]==undefined) {
     	console.log("TJ line undefined. Wierd. Line "+thisline);
     }
@@ -905,14 +926,23 @@ function showPUText(thisline) {
 		var top=GP_Images[GP[arrayline].page].frame_t+(plines*lineht);
 	}
 	if (currView=="MS") $('#msLIneBox').show();
-	currAudioLine=thisline;
 	var proportion=$("#msImage").width()/GP_Images[GP[arrayline].page].full_x;
     //calculate offset height, according to window size...
-//    console.log("image height "+$("#msImage").height());
-    var offsetTop=60-$("#msImage").height()/15;
+//    console.log("image height "+$("#msImage").height())
+//    var offsetTop;
+//	console.log("in ShowPUText line "+thisline+" currline "+currAudioLine+" proportion "+proportion+" msline top "+(GP_Images[GP[arrayline].page].frame_r-GP_Images[GP[arrayline].page].frame_l)*proportion);
+	currAudioLine=thisline;
+
+//	console.log("top "+top+" offset top "+offsetTop);
 	$('#msLIneBox').css({'width': (GP_Images[GP[arrayline].page].frame_r-GP_Images[GP[arrayline].page].frame_l)*proportion});
 	$('#msLIneBox').css({top: (top*proportion) - 8, left: (left*proportion)});
- 	$('#PUText').css({top: (top*proportion)+offsetTop});
+// place pu text according to where the box is in the page. Default is below
+//	if ($("#msLIneBox").offset().top + $('#PUText').height() + 10 > $(window).height()) {
+//		$('#PUText').offset({top: document.getElementById("msLIneBox").getBoundingClientRect().y-10-($('#PUText').height()*proportion)});
+//	} else {
+	     $('#PUText').offset({top: document.getElementById("msLIneBox").getBoundingClientRect().y + $('#msLIneBox').height() +10});
+//	}
+//	 	$('#PUText').css({top: (top*proportion)+offsetTop});
  	$('#PUText').show();
 }
 
@@ -970,12 +1000,12 @@ function isElementInViewport (el) {
     efp      = function (x, y) { return document.elementFromPoint(x, y) },
     contains = "contains" in el ? "contains" : "compareDocumentPosition",
     has      = contains == "contains" ? 1 : 0x14;
-    
+
     // Return false if it's not in the viewport
     if (rect.right < 0 || rect.bottom < 0
         || rect.left > vWidth || rect.top > vHeight)
         return false;
-    
+
     // Return true if any of its four corners are visible
     return (
             (eap = efp(rect.left,  rect.top)) == el || el[contains](eap) == has
@@ -1002,8 +1032,8 @@ function setUpSmallScreen() {
     $("#combinedNGLink").show();
     $("#buttonsc").removeClass("ui-block-c");
     $("#buttonsc").addClass("ui-block-b");
-    $("#buttonsc").css({width:"66%"});
-    $("#buttonsa").css({width:"34%"});
+    $("#buttonsc").css({width:"60%"});
+    $("#buttonsa").css({width:"40%"});
     if ($(window).width()<500) {
         $(".buttons").css({height:"30px"});
     }
@@ -1202,7 +1232,7 @@ function showMS () {
     $('#combglnotesviewicn').parent().removeClass('ui-btn-emph');
     $('#msviewicn').parent().addClass('ui-btn-emph');
     $('#transviewicn').parent().removeClass('ui-btn-emph');
-    
+
     $("#Text").hide();
     if ($("#Glosses").width()>0) {
         $('#msImage').attr("width", $('body').width()-$("#Glosses").width());
@@ -1253,7 +1283,7 @@ function showTrans () {
     $('#combglnotesviewicn').parent().removeClass('ui-btn-emph');
     $('#transviewicn').parent().addClass('ui-btn-emph');
     $('#Glosses').css({'top':0, 'left':$("#Text").width(),'position': 'absolute', 'z-index': 500});
-    $("#BodyText").css({'overflow-y':'hidden'});
+//    $("#BodyText").css({'overflow-y':'hidden'});
     $('#BodyText').show();
     setUpArrows("text");
 }
@@ -1562,9 +1592,32 @@ function stopAudio() {
 	$("#PACmd").attr("onclick", "playAudio()");
 	$("#stopAudioLink").hide();
     //   	$("#apAdjust").hide();
-    
+
 }
 
+function calculateLineHeight() {
+	if ($("#Image").is(":visible")) {
+		//figure out where we are and what we are going to show...
+		//which image?
+		var myImage = $("#msImage").attr("src").slice($("#msImage").attr("src").indexOf("/")+1);
+		var thisPage={};
+		for (var i in GP_Images) {
+			if (GP_Images[i].image==myImage) {
+    			thisPage={page: i, pageInf: GP_Images [i]};
+    			break;
+     		}
+     	}
+ 	}
+	var winheight=$(window).height();
+	var winwidth=$(window).width();
+	var scrolltop=$("#BodyText").scrollTop();
+	if ($("#Glosses").is(":visible")) winwidth-=300;
+	if ($("#Notes").is(":visible")) winheight=winheight/2;
+	var factor=winwidth/thisPage.pageInf.full_x;
+	var topFrameSize=thisPage.pageInf.frame_t*factor;
+    var bottomFrameStart=thisPage.pageInf.frame_b*factor;
+    return({spacePerLine:((thisPage.pageInf.frame_b-thisPage.pageInf.frame_t)/thisPage.pageInf.nlines)*factor, topFrameSize: topFrameSize, bottomFrameStart: bottomFrameStart});
+}
 
 function updateCaptions() {
 	var arrayline=getArrayLine(line);
@@ -1608,14 +1661,19 @@ function updateCaptions() {
     }  else if (currView=="MS"){
 		showPUText(line);
 		if (audioPlaying) {
-			var position = $("#PUText").offset();
+//			console.log("im PU text "+line+"position "+position+" position2 "+position2);
+			var position = $("#msLIneBox").offset();
 			var position2 = $("#PUText").position();
 			var posFoot = $("#BodyText").height()-20;
+			var lineHeight=calculateLineHeight().spacePerLine;
+      var spaceReq=$('#msLIneBox').height()+$("#PUText").height()+15;
  //           console.log("where am I");
-			if (position.top+150>posFoot || position.top<5) {
-                $('#BodyText').animate({scrollTop: position2.top + 10}, "slow");
+			if (position.top+spaceReq>posFoot) {
+        //when we get to the bottom of the page...
+				console.log("top of PUText box "+position.top+" window height "+ $(window).height()+" body height "+posFoot+" space per line "+lineHeight);
+        $('#BodyText').animate({scrollTop: position.top-lineHeight}, "slow");
                 //	   $('#Gloss').css({'position':'relative'});
-                $('#Glosses').animate({top: position2.top}, "slow");
+        $('#Glosses').animate({top: position2.top}, "slow");
 			}
 			$('#LineInf').hide();
 		} else {
@@ -1656,5 +1714,3 @@ function windowNeedsEnlarging () {
     console.log("Window not big enough")
     return true;
 }
-
-

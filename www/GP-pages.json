@@ -1,5 +1,5 @@
 var GP_Images = new Array ();
-GP_Images["1r"] = {"full_x":1753, "full_y": 2514, "frame_t": 575, "frame_l": 191, "frame_r":1189, "frame_b": 2042, "nlines":32, "image":"2R.JPG", "rubric_l": 223,"rubric_t":275, "firstl": 0};
+GP_Images["1r"] = {"full_x":1753, "full_y": 2514, "frame_t": 575, "frame_l": 191, "frame_r":1189, "frame_b": 2042, "nlines":33, "image":"2R.JPG", "rubric_l": 223,"rubric_t":275, "firstl": 0};
 GP_Images["1v"] = {"full_x":1817, "full_y": 2548, "frame_t": 324, "frame_l": 540, "frame_r":1617, "frame_b": 2112, "nlines":40, "image":"2V.JPG", "rubric":0,  "firstl": 33};
 GP_Images["2r"] = {"full_x":1724, "full_y": 2514, "frame_t": 346, "frame_l": 185, "frame_r":993, "frame_b": 2066, "nlines":40, "image":"3R.JPG", "rubric":0,  "firstl": 73};
 GP_Images["2v"] = {"full_x":1816, "full_y": 2548, "frame_t": 340, "frame_l": 542, "frame_r":1333, "frame_b": 2095, "nlines":40, "image":"3V.JPG", "rubric":0,  "firstl": 113};
